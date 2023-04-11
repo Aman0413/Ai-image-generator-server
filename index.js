@@ -24,9 +24,14 @@ app.get("/", (req, res) => {
 
 app.use(morgan("dev"));
 
+let client = "http://localhost:3000";
+
+if (process.env.NODE.ENV === "production") {
+  client = process.env.CLIENT_URL;
+}
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: client,
   })
 );
 app.post("/api/image", async (req, res) => {
