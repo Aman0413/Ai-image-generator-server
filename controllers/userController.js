@@ -52,7 +52,8 @@ const postImage = async (req, res) => {
 
 const showAllPost = async (req, res) => {
   try {
-    const data = await Post.find();
+    const sortParams = { _id: -1 };
+    const data = await Post.find().sort(sortParams);
     return res.status(200).json({ status: "ok", data });
   } catch (error) {
     return res.status(500).send(error.message);
